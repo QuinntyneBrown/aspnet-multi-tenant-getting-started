@@ -4,9 +4,10 @@ using Newtonsoft.Json.Serialization;
 using Owin;
 using System.Web.Http;
 using Microsoft.Practices.Unity;
+using static Chloe.Server.UnityConfiguration;
 
 namespace Chloe.Server
-{
+{    
     public class ApiConfiguration
     {
         public static void Install(HttpConfiguration config, IAppBuilder app)
@@ -14,7 +15,7 @@ namespace Chloe.Server
 
             app.Use(async (context, next) =>
             {
-                var tenant = UnityConfiguration.GetContainer().Resolve<ITenantService>().GetByUri(context.Request.Uri.Host);
+                var tenant = GetContainer().Resolve<ITenantService>().GetByUri(context.Request.Uri.Host);                
                 context.Environment.Add("MultiTenant", tenant);
                 await next();
             });
