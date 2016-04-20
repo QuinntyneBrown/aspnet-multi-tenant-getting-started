@@ -156,6 +156,8 @@
     <Compile Include="Server\Exceptions\ArticleNotFound.cs" />
     <Compile Include="Server\Exceptions\NotFoundException.cs" />
     <Compile Include="Server\Exceptions\TenantNotFound.cs" />
+    <Compile Include="Server\Extensions\AppBuilderExtensions.cs" />
+    <Compile Include="Server\Middleware\TenantMiddleware.cs" />
     <Compile Include="Server\Models\Article.cs" />
     <Compile Include="Server\Models\BaseEntity.cs" />
     <Compile Include="Server\Models\Tenant.cs" />

@@ -5,6 +5,8 @@ using Owin;
 using System.Web.Http;
 using Microsoft.Practices.Unity;
 using static Chloe.Server.UnityConfiguration;
+using Chloe.Server.Middleware;
+using Chloe.Server.Extensions;
 
 namespace Chloe.Server
 {    
@@ -12,13 +14,7 @@ namespace Chloe.Server
     {
         public static void Install(HttpConfiguration config, IAppBuilder app)
         {
-
-            app.Use(async (context, next) =>
-            {
-                var tenant = GetContainer().Resolve<ITenantService>().GetByUri(context.Request.Uri.Host);                
-                context.Environment.Add("MultiTenant", tenant);
-                await next();
-            });
+            app.UseTenantMiddleware();
 
             var jSettings = new JsonSerializerSettings();
             jSettings.Formatting = Formatting.Indented;
